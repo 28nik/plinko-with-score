@@ -61,7 +61,6 @@ function draw() {
 
   textSize(20);
  text("Score : "+score,20,30);
- text("mouseX = "+mouseX+", mouseY = " + mouseY,mouseX,mouseY);
  text("500", 20,510);
  text("500", 100,510);
  text("500", 180,510);
@@ -75,7 +74,7 @@ function draw() {
   Engine.update(engine);
   
  text ("chances left:" + (5-count), width-200, 30)
-
+ 
  if (gameState === "end"){
    textSize(50);
    text("Game over", width/3, height/2)
@@ -95,12 +94,13 @@ function draw() {
    
   //    particles[j].display();
   //  }
+  
   if(particles !=null){
 
     particles.display();
 
     if (particles.body.position.y>760){
-      if (particles.body.position.x < 300){
+      if (particles.body.position.x < 300 && particles.body.position.x > 0){
         score+=500;
         particles = null;
         if (count>=5){
@@ -133,5 +133,8 @@ function mousePressed() {
   if (gameState !=="end"){
     particles = new Particle(mouseX, 10,10,10);
     count+=1;
+  }
+  if (count<0){
+    gameState = "end";
   }
 }
